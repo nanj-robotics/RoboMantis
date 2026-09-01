@@ -89,7 +89,6 @@ interfaces.
   </tr>
 </table>
 
-
 **FoundationPose** — 6D pose estimation
 **Hand‑eye Calibration** — easy_handeye2
 
