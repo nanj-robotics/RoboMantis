@@ -84,7 +84,7 @@ interfaces.
     </td>
     <td align="center">
       <img src="./assets/handeye.png" width="420" />
-      <br /><strong>Hand‑eye Calibration</strong> — easy_handeye2 (eye‑on‑base)
+      <br /><strong>Hand‑eye Calibration</strong> — easy_handeye2
     </td>
   </tr>
 </table>
