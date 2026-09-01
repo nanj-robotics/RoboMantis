@@ -2,7 +2,7 @@
 
 <div align="center">
   <video width="480" controls>
-    <source src="PASTE_DRAGGED_VIDEO_LINK_HERE" type="video/mp4">
+    <source src="https://github.com/user-attachments/assets/14525526-cf43-481a-9aa0-0c9e67f041a4" type="video/mp4">
   </video>
   <p>RoboMantis (Dual 7‑DOF robot arms)</p>
 </div>
