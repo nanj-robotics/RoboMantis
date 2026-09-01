@@ -76,6 +76,20 @@ The screenshots below are provided as a visual reference for the expected
 appearance of the FoundationPose pose estimation and easy_handeye2 calibration
 interfaces.
 
+<table>
+  <tr>
+    <td align="center">
+      <img src="./assets/foundationpose.png" width="420" />
+      <br /><strong>FoundationPose</strong> — 6D pose estimation
+    </td>
+    <td align="center">
+      <img src="./assets/handeye.png" width="420" />
+      <br /><strong>Hand‑eye Calibration</strong> — easy_handeye2 (eye‑on‑base)
+    </td>
+  </tr>
+</table>
+
+
 **FoundationPose** — 6D pose estimation
 **Hand‑eye Calibration** — easy_handeye2
 
