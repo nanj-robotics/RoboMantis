@@ -1,0 +1,75 @@
+# joint_limits.yaml — RoboMantis 双臂 14 关节
+default_velocity_scaling_factor: 0.1
+default_acceleration_scaling_factor: 0.1
+
+joint_limits:
+  left_joint1:
+    has_velocity_limits: true
+    max_velocity: 5.0
+    has_acceleration_limits: false
+    max_acceleration: 0.0
+  left_joint2:
+    has_velocity_limits: true
+    max_velocity: 5.0
+    has_acceleration_limits: false
+    max_acceleration: 0.0
+  left_joint3:
+    has_velocity_limits: true
+    max_velocity: 5.0
+    has_acceleration_limits: false
+    max_acceleration: 0.0
+  left_joint4:
+    has_velocity_limits: true
+    max_velocity: 5.0
+    has_acceleration_limits: false
+    max_acceleration: 0.0
+  left_joint5:
+    has_velocity_limits: true
+    max_velocity: 5.0
+    has_acceleration_limits: false
+    max_acceleration: 0.0
+  left_joint6:
+    has_velocity_limits: true
+    max_velocity: 5.0
+    has_acceleration_limits: false
+    max_acceleration: 0.0
+  left_joint7:
+    has_velocity_limits: true
+    max_velocity: 5.0
+    has_acceleration_limits: false
+    max_acceleration: 0.0
+  right_joint1:
+    has_velocity_limits: true
+    max_velocity: 5.0
+    has_acceleration_limits: false
+    max_acceleration: 0.0
+  right_joint2:
+    has_velocity_limits: true
+    max_velocity: 5.0
+    has_acceleration_limits: false
+    max_acceleration: 0.0
+  right_joint3:
+    has_velocity_limits: true
+    max_velocity: 5.0
+    has_acceleration_limits: false
+    max_acceleration: 0.0
+  right_joint4:
+    has_velocity_limits: true
+    max_velocity: 5.0
+    has_acceleration_limits: false
+    max_acceleration: 0.0
+  right_joint5:
+    has_velocity_limits: true
+    max_velocity: 5.0
+    has_acceleration_limits: false
+    max_acceleration: 0.0
+  right_joint6:
+    has_velocity_limits: true
+    max_velocity: 5.0
+    has_acceleration_limits: false
+    max_acceleration: 0.0
+  right_joint7:
+    has_velocity_limits: true
+    max_velocity: 5.0
+    has_acceleration_limits: false
+    max_acceleration: 0.0

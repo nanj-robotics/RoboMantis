@@ -1,0 +1,87 @@
+planning_plugin: ompl_interface/OMPLPlanner
+request_adapters: >-
+  default_planner_request_adapters/AddTimeOptimalParameterization
+  default_planner_request_adapters/FixWorkspaceBounds
+  default_planner_request_adapters/FixStartStateBounds
+  default_planner_request_adapters/FixStartStateCollision
+  default_planner_request_adapters/FixStartStatePathConstraints
+start_state_max_bounds_error: 0.1
+
+planner_configs:
+  RRTConnect:
+    type: geometric::RRTConnect
+    range: 0.0
+  RRT:
+    type: geometric::RRT
+    range: 0.0
+    goal_bias: 0.05
+  RRTstar:
+    type: geometric::RRTstar
+    range: 0.0
+    goal_bias: 0.05
+    delay_collision_checking: 1
+  PRM:
+    type: geometric::PRM
+    max_nearest_neighbors: 10
+  PRMstar:
+    type: geometric::PRMstar
+  KPIECE:
+    type: geometric::KPIECE
+    range: 0.0
+    goal_bias: 0.05
+    border_fraction: 0.9
+  BKPIECE:
+    type: geometric::BKPIECE
+    range: 0.0
+    border_fraction: 0.9
+  EST:
+    type: geometric::EST
+    range: 0.0
+    goal_bias: 0.05
+  TRRT:
+    type: geometric::TRRT
+    range: 0.0
+    goal_bias: 0.05
+    max_states_failed: 10
+    temp_change_factor: 2.0
+    min_temperature: 10e-10
+    init_temperature: 10e-6
+
+left_arm:
+  default_planner_config: RRTConnect
+  planner_configs:
+    - RRTConnect
+    - RRT
+    - RRTstar
+    - KPIECE
+    - BKPIECE
+    - EST
+    - PRM
+    - PRMstar
+    - TRRT
+  projection_evaluator: joints(left_joint1,left_joint2,left_joint3,left_joint4,left_joint5,left_joint6,left_joint7)
+  longest_valid_segment_fraction: 0.005
+
+right_arm:
+  default_planner_config: RRTConnect
+  planner_configs:
+    - RRTConnect
+    - RRT
+    - RRTstar
+    - KPIECE
+    - BKPIECE
+    - EST
+    - PRM
+    - PRMstar
+    - TRRT
+  projection_evaluator: joints(right_joint1,right_joint2,right_joint3,right_joint4,right_joint5,right_joint6,right_joint7)
+  longest_valid_segment_fraction: 0.005
+
+both_arms:
+  default_planner_config: RRTConnect
+  planner_configs:
+    - RRTConnect
+    - RRT
+    - RRTstar
+  projection_evaluator: joints(left_joint1,left_joint2,left_joint3,right_joint1,right_joint2,right_joint3)
+  longest_valid_segment_fraction: 0.005

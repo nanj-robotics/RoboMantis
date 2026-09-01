@@ -1,0 +1,281 @@
+<?xml version="1.0"?>
+<!--
+  geni_craner_arm.xacro
+  单臂 xacro 宏（prefix-aware），由原 geni_craner.urdf 转换而来。
+  几何/惯量/关节参数与原 URDF 完全一致，仅：
+    1. 所有 link/joint 名称加 ${prefix} 前缀
+    2. mesh 路径改为 package:// 相对路径
+    3. 移除 world 链接与 world_joint（由顶层双臂文件提供）
+  用法：<xacro:geni_craner_arm prefix="left_" />
+-->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="geni_craner_arm" params="prefix">
+
+    <!-- ========== base_link ========== -->
+    <link name="${prefix}base_link">
+      <inertial>
+        <origin xyz="-3.055E-05 -0.00012601 0.035923" rpy="0 0 0" />
+        <mass value="1.6531" />
+        <inertia ixx="0.004393" ixy="-2E-05" ixz="2E-06"
+                 iyy="0.004383" iyz="6E-06" izz="0.006969" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robomantis_description/meshes/base_link.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="0.52941 0.54902 0.54902 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robomantis_description/meshes/base_link.STL" />
+        </geometry>
+      </collision>
+    </link>
+
+    <!-- ========== link1 ========== -->
+    <link name="${prefix}link1">
+      <inertial>
+        <origin xyz="-0.00014868 0.0030229 0.077666" rpy="0 0 0" />
+        <mass value="1.8898" />
+        <inertia ixx="0.004533" ixy="-1E-06" ixz="-7E-06"
+                 iyy="0.005028" iyz="0.000159" izz="0.001778" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robomantis_description/meshes/link1.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="0.89804 0.91765 0.92941 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robomantis_description/meshes/link1.STL" />
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="${prefix}joint1" type="revolute">
+      <origin xyz="-1.4719E-05 9.8459E-05 0.0675" rpy="0 0 0" />
+      <parent link="${prefix}base_link" />
+      <child link="${prefix}link1" />
+      <axis xyz="0 0 1" />
+      <limit lower="-3.1415" upper="3.1415" effort="6" velocity="5" />
+    </joint>
+
+    <!-- ========== link2 ========== -->
+    <link name="${prefix}link2">
+      <inertial>
+        <origin xyz="6.0182E-06 0.063302 -0.0076767" rpy="0 0 0" />
+        <mass value="1.3279" />
+        <inertia ixx="0.002917" ixy="0" ixz="0"
+                 iyy="0.000788" iyz="-0.000681" izz="0.002813" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robomantis_description/meshes/link2.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="0.52941 0.54902 0.54902 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robomantis_description/meshes/link2.STL" />
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="${prefix}joint2" type="revolute">
+      <origin xyz="-0.00025826 -0.02313 0.10442" rpy="1.5708 0 0" />
+      <parent link="${prefix}link1" />
+      <child link="${prefix}link2" />
+      <axis xyz="0 0 1" />
+      <limit lower="-2.0944" upper="2.0944" effort="20" velocity="5" />
+    </joint>
+
+    <!-- ========== link3 ========== -->
+    <link name="${prefix}link3">
+      <inertial>
+        <origin xyz="-6.1846E-08 0.0073501 0.080573" rpy="0 0 0" />
+        <mass value="0.62494" />
+        <inertia ixx="0.001081" ixy="0" ixz="0"
+                 iyy="0.001023" iyz="-7.1E-05" izz="0.000313" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robomantis_description/meshes/link3.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="0.89804 0.91765 0.92941 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robomantis_description/meshes/link3.STL" />
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="${prefix}joint3" type="revolute">
+      <origin xyz="0 0.13825 -0.02225" rpy="-1.5708 0 0" />
+      <parent link="${prefix}link2" />
+      <child link="${prefix}link3" />
+      <axis xyz="0 0 1" />
+      <limit lower="-3.1415" upper="3.1415" effort="5" velocity="5" />
+    </joint>
+
+    <!-- ========== link4 ========== -->
+    <link name="${prefix}link4">
+      <inertial>
+        <origin xyz="-9.3856E-05 0.098138 -0.018905" rpy="0 0 0" />
+        <mass value="0.61987" />
+        <inertia ixx="0.001444" ixy="-1E-06" ixz="0"
+                 iyy="0.000301" iyz="-0.00024" izz="0.001395" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robomantis_description/meshes/link4.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="0.52941 0.54902 0.54902 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robomantis_description/meshes/link4.STL" />
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="${prefix}joint4" type="revolute">
+      <origin xyz="0 -0.0255 0.1034" rpy="1.5708 0 0" />
+      <parent link="${prefix}link3" />
+      <child link="${prefix}link4" />
+      <axis xyz="0 0 1" />
+      <limit lower="-1.658" upper="1.658" effort="5" velocity="5" />
+    </joint>
+
+    <!-- ========== link5 ========== -->
+    <link name="${prefix}link5">
+      <inertial>
+        <origin xyz="8.8967E-06 0.0065391 0.08054" rpy="0 0 0" />
+        <mass value="0.62494" />
+        <inertia ixx="0.001078" ixy="0" ixz="0"
+                 iyy="0.001023" iyz="-6.8E-05" izz="0.000312" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robomantis_description/meshes/link5.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="0.89804 0.91765 0.92941 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robomantis_description/meshes/link5.STL" />
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="${prefix}joint5" type="revolute">
+      <origin xyz="0 0.15499 -0.0255" rpy="-1.5708 0 0" />
+      <parent link="${prefix}link4" />
+      <child link="${prefix}link5" />
+      <axis xyz="0 0 1" />
+      <limit lower="-3.1415" upper="3.1415" effort="5" velocity="5" />
+    </joint>
+
+    <!-- ========== link6 ========== -->
+    <link name="${prefix}link6">
+      <inertial>
+        <origin xyz="0.00033837 0.097989 -0.018866" rpy="0 0 0" />
+        <mass value="0.61987" />
+        <inertia ixx="0.001442" ixy="-2E-06" ixz="1E-06"
+                 iyy="0.000301" iyz="-0.00024" izz="0.001396" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robomantis_description/meshes/link6.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="0.52941 0.54902 0.54902 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robomantis_description/meshes/link6.STL" />
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="${prefix}joint6" type="revolute">
+      <origin xyz="0 -0.026175 0.10336" rpy="1.5708 0 0" />
+      <parent link="${prefix}link5" />
+      <child link="${prefix}link6" />
+      <axis xyz="0 0.00048565 1" />
+      <limit lower="-1.658" upper="1.658" effort="5" velocity="5" />
+    </joint>
+
+    <!-- ========== link7_gripper ========== -->
+    <link name="${prefix}link7_gripper">
+      <inertial>
+        <origin xyz="9.4492E-05 -3.4369E-05 0.048" rpy="0 0 0" />
+        <mass value="0.14591" />
+        <inertia ixx="0.000114" ixy="0" ixz="0"
+                 iyy="0.000114" iyz="0" izz="5E-06" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robomantis_description/meshes/link7_gripper.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="0.89804 0.91765 0.92941 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robomantis_description/meshes/link7_gripper.STL" />
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="${prefix}joint7" type="continuous">
+      <origin xyz="0.00027939 0.15484 -0.025575" rpy="-1.5708 0 0" />
+      <parent link="${prefix}link6" />
+      <child link="${prefix}link7_gripper" />
+      <axis xyz="0 0.00048565 1" />
+      <limit lower="-3.1415" upper="3.1415" effort="5" velocity="5" />
+    </joint>
+
+    <!-- ========== tool0 (伸出 9.6cm) ========== -->
+    <link name="${prefix}tool0" />
+    <joint name="${prefix}tool0_joint" type="fixed">
+      <parent link="${prefix}link7_gripper" />
+      <child link="${prefix}tool0" />
+      <origin xyz="0 0 0.096" rpy="0 0 0" />
+    </joint>
+
+  </xacro:macro>
+
+</robot>

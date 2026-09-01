@@ -1,0 +1,285 @@
+<?xml version="1.0"?>
+<!--
+  robomantis_dual.ros2_control.xacro
+  ====================================
+  双臂 ros2_control 配置。两个独立 system，各加载各自的硬件插件。
+  严格对应原单臂配置，仅改插件名、joint 前缀和 urdf_path。
+
+  左臂 left_  = 原 geni_craner1 (RS01 J1, motor 8-14, can2/can3)
+                插件: robomantis_hw_rs01/RsA3HardwareInterface
+  右臂 right_ = 原 geni_craner  (RS06 J1, motor 1-7,  can0/can1)
+                插件: robomantis_hw_rs06/RsA3HardwareInterface
+
+  每个 joint 声明 position/velocity/effort 三个 command interface
+  和 position/velocity/effort 三个 state interface：
+    - joint_trajectory_controller  claim position
+    - zero_torque_controller       claim effort
+  切换控制器时 ros2_control 自动释放/重 claim。
+-->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- ==================== 左臂 = 原 geni_craner1 (RS01) ==================== -->
+  <ros2_control name="GeniCranerLeftHardware" type="system">
+    <hardware>
+      <plugin>robomantis_hw_rs01/RsA3HardwareInterface</plugin>
+      <param name="host_can_id">0xFD</param>
+      <param name="position_kp">100.0</param>
+      <param name="position_kd">4.0</param>
+      <param name="velocity_limit">1.0</param>
+      <param name="max_velocity">1.0</param>
+      <param name="max_acceleration">0.5</param>
+      <param name="smoothing_alpha">0.5</param>
+      <param name="use_mock_hardware">false</param>
+      <param name="urdf_path">$(find robomantis_description)/urdf/geni_craner_rs01_single.urdf</param>
+      <param name="use_pinocchio_gravity">true</param>
+      <param name="gravity_feedforward_ratio">1.0</param>
+      <param name="adaptive_kd_enabled">true</param>
+      <param name="zero_torque_kd_min">0.08</param>
+      <param name="zero_torque_kd_max">0.6</param>
+      <param name="kd_velocity_ref">1.0</param>
+      <param name="kd_smoothing_alpha">0.15</param>
+    </hardware>
+
+    <joint name="left_joint1">
+      <param name="motor_id">8</param>
+      <param name="motor_type">RS01</param>
+      <param name="can_interface">can3</param>
+      <param name="direction">-1.0</param>
+      <param name="lower_limit">-3.1415</param>
+      <param name="upper_limit">3.1415</param>
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="left_joint2">
+      <param name="motor_id">9</param>
+      <param name="motor_type">RS03</param>
+      <param name="can_interface">can3</param>
+      <param name="direction">-1.0</param>
+      <param name="lower_limit">-2.0944</param>
+      <param name="upper_limit">2.0944</param>
+      <param name="kp">260</param>
+      <param name="kd">10</param>
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="left_joint3">
+      <param name="motor_id">10</param>
+      <param name="motor_type">RS00</param>
+      <param name="can_interface">can2</param>
+      <param name="direction">-1.0</param>
+      <param name="lower_limit">-3.1415</param>
+      <param name="upper_limit">3.1415</param>
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="left_joint4">
+      <param name="motor_id">11</param>
+      <param name="motor_type">RS00</param>
+      <param name="can_interface">can2</param>
+      <param name="direction">-1.0</param>
+      <param name="lower_limit">-1.658</param>
+      <param name="upper_limit">1.658</param>
+      <param name="kp">100</param>
+      <param name="kd">5</param>
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="left_joint5">
+      <param name="motor_id">12</param>
+      <param name="motor_type">RS00</param>
+      <param name="can_interface">can2</param>
+      <param name="direction">-1.0</param>
+      <param name="lower_limit">-3.1415</param>
+      <param name="upper_limit">3.1415</param>
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="left_joint6">
+      <param name="motor_id">13</param>
+      <param name="motor_type">RS00</param>
+      <param name="can_interface">can2</param>
+      <param name="direction">-1.0</param>
+      <param name="lower_limit">-1.658</param>
+      <param name="upper_limit">1.658</param>
+      <param name="kp">100</param>
+      <param name="kd">5</param>
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="left_joint7">
+      <param name="motor_id">14</param>
+      <param name="motor_type">RS00</param>
+      <param name="can_interface">can2</param>
+      <param name="direction">-1.0</param>
+      <param name="lower_limit">-3.1415</param>
+      <param name="upper_limit">3.1415</param>
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+  </ros2_control>
+
+  <!-- ==================== 右臂 = 原 geni_craner (RS06) ==================== -->
+  <ros2_control name="GeniCranerRightHardware" type="system">
+    <hardware>
+      <plugin>robomantis_hw_rs06/RsA3HardwareInterface</plugin>
+      <param name="host_can_id">0xFD</param>
+      <param name="position_kp">100.0</param>
+      <param name="position_kd">4.0</param>
+      <param name="velocity_limit">0.2</param>
+      <param name="max_velocity">0.2</param>
+      <param name="max_acceleration">0.5</param>
+      <param name="smoothing_alpha">0.8</param>
+      <param name="use_mock_hardware">false</param>
+      <param name="urdf_path">$(find robomantis_description)/urdf/geni_craner_rs06_single.urdf</param>
+      <param name="use_pinocchio_gravity">true</param>
+      <param name="gravity_feedforward_ratio">1.0</param>
+      <param name="adaptive_kd_enabled">true</param>
+      <param name="zero_torque_kd_min">0.08</param>
+      <param name="zero_torque_kd_max">0.6</param>
+      <param name="kd_velocity_ref">1.0</param>
+      <param name="kd_smoothing_alpha">0.15</param>
+    </hardware>
+
+    <joint name="right_joint1">
+      <param name="motor_id">1</param>
+      <param name="motor_type">RS06</param>
+      <param name="can_interface">can1</param>
+      <param name="direction">-1.0</param>
+      <param name="lower_limit">-3.1415</param>
+      <param name="upper_limit">3.1415</param>
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="right_joint2">
+      <param name="motor_id">2</param>
+      <param name="motor_type">RS03</param>
+      <param name="can_interface">can1</param>
+      <param name="direction">-1.0</param>
+      <param name="lower_limit">-2.0944</param>
+      <param name="upper_limit">2.0944</param>
+      <param name="kp">100</param>
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="right_joint3">
+      <param name="motor_id">3</param>
+      <param name="motor_type">RS00</param>
+      <param name="can_interface">can0</param>
+      <param name="direction">-1.0</param>
+      <param name="lower_limit">-3.1415</param>
+      <param name="upper_limit">3.1415</param>
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="right_joint4">
+      <param name="motor_id">4</param>
+      <param name="motor_type">RS00</param>
+      <param name="can_interface">can0</param>
+      <param name="direction">-1.0</param>
+      <param name="lower_limit">-1.658</param>
+      <param name="upper_limit">1.658</param>
+      <param name="kp">100</param>
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="right_joint5">
+      <param name="motor_id">5</param>
+      <param name="motor_type">RS00</param>
+      <param name="can_interface">can0</param>
+      <param name="direction">-1.0</param>
+      <param name="lower_limit">-3.1415</param>
+      <param name="upper_limit">3.1415</param>
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="right_joint6">
+      <param name="motor_id">6</param>
+      <param name="motor_type">RS00</param>
+      <param name="can_interface">can0</param>
+      <param name="direction">-1.0</param>
+      <param name="lower_limit">-1.658</param>
+      <param name="upper_limit">1.658</param>
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="right_joint7">
+      <param name="motor_id">7</param>
+      <param name="motor_type">RS00</param>
+      <param name="can_interface">can0</param>
+      <param name="direction">-1.0</param>
+      <param name="lower_limit">-3.1415</param>
+      <param name="upper_limit">3.1415</param>
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+  </ros2_control>
+
+</robot>

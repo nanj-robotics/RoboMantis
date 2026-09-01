@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!--
+  robomantis_dual.urdf.xacro
+  ==========================
+  RoboMantis 双臂顶层 URDF。
+
+  左右定义（观察者视角）：人站在 +X 一侧、面朝 -X 看向两个机械臂，
+  人的左手边为左臂、右手边为右臂。
+  此视角下：-Y 在观察者左手边，+Y 在观察者右手边。
+
+  ┌──────────────────────────────────────────────────────────────────┐
+  │  左臂 left_  = 原 geni_craner1 (RS01 J1, motor 8-14, can2/can3)  │
+  │  右臂 right_ = 原 geni_craner  (RS06 J1, motor 1-7,  can0/can1)  │
+  └──────────────────────────────────────────────────────────────────┘
+
+  两臂 base_link 原点在 Y 方向相距 35cm，以 world 为中心对称：
+    left_base_link  : (0, -0.175, 0)   ← 观察者左手边
+    right_base_link : (0, +0.175, 0)   ← 观察者右手边
+-->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robomantis_dual">
+
+  <!-- 引入单臂宏 -->
+  <xacro:include filename="$(find robomantis_description)/urdf/geni_craner_arm.xacro" />
+  <!-- 引入双臂 ros2_control（含两个独立 hardware 包） -->
+  <xacro:include filename="$(find robomantis_description)/urdf/robomantis_dual.ros2_control.xacro" />
+
+  <!-- 全局 world 链接 -->
+  <link name="world" />
+
+  <!-- ===== 左臂 = 原 geni_craner1 (RS01)，观察者左手边 -Y 17.5cm ===== -->
+  <joint name="left_world_joint" type="fixed">
+    <parent link="world" />
+    <child link="left_base_link" />
+    <origin xyz="0 -0.175 0" rpy="0 0 0" />
+  </joint>
+  <xacro:geni_craner_arm prefix="left_" />
+
+  <!-- ===== 右臂 = 原 geni_craner (RS06)，观察者右手边 +Y 17.5cm ===== -->
+  <joint name="right_world_joint" type="fixed">
+    <parent link="world" />
+    <child link="right_base_link" />
+    <origin xyz="0 0.175 0" rpy="0 0 0" />
+  </joint>
+  <xacro:geni_craner_arm prefix="right_" />
+
+</robot>

@@ -1,0 +1,98 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 200
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    # 左臂 = 原 geni_craner1 (RS01)
+    left_joint_trajectory_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+    # 右臂 = 原 geni_craner (RS06)
+    right_joint_trajectory_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    # 左臂零力矩：来自 robomantis_hw_rs01 包（原 geni_craner1 代码）
+    left_zero_torque_controller:
+      type: robomantis_hw_rs01/ZeroTorqueController
+    # 右臂零力矩：来自 robomantis_hw_rs06 包（原 geni_craner 代码）
+    right_zero_torque_controller:
+      type: robomantis_hw_rs06/ZeroTorqueController
+
+# ==================== 左臂轨迹控制器（原 geni_craner1, RS01） ====================
+left_joint_trajectory_controller:
+  ros__parameters:
+    joints:
+      - left_joint1
+      - left_joint2
+      - left_joint3
+      - left_joint4
+      - left_joint5
+      - left_joint6
+      - left_joint7
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+    state_publish_rate: 50.0
+    action_monitor_rate: 20.0
+    allow_partial_joints_goal: false
+    open_loop_control: false
+    constraints:
+      stopped_velocity_tolerance: 0.01
+      goal_time: 0.0
+
+# ==================== 右臂轨迹控制器（原 geni_craner, RS06） ====================
+right_joint_trajectory_controller:
+  ros__parameters:
+    joints:
+      - right_joint1
+      - right_joint2
+      - right_joint3
+      - right_joint4
+      - right_joint5
+      - right_joint6
+      - right_joint7
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+    state_publish_rate: 50.0
+    action_monitor_rate: 20.0
+    allow_partial_joints_goal: false
+    open_loop_control: false
+    constraints:
+      stopped_velocity_tolerance: 0.01
+      goal_time: 0.0
+
+# ==================== 左臂零力矩（robomantis_hw_rs01，原 geni_craner1） ====================
+left_zero_torque_controller:
+  ros__parameters:
+    joints:
+      - left_joint1
+      - left_joint2
+      - left_joint3
+      - left_joint4
+      - left_joint5
+      - left_joint6
+      - left_joint7
+    kd: 1.0
+    # launch 文件会用 get_package_share_directory 动态覆盖此路径
+    urdf_path: geni_craner_rs01_single.urdf
+
+# ==================== 右臂零力矩（robomantis_hw_rs06，原 geni_craner） ====================
+right_zero_torque_controller:
+  ros__parameters:
+    joints:
+      - right_joint1
+      - right_joint2
+      - right_joint3
+      - right_joint4
+      - right_joint5
+      - right_joint6
+      - right_joint7
+    kd: 1.0
+    # launch 文件会用 get_package_share_directory 动态覆盖此路径
+    urdf_path: geni_craner_rs06_single.urdf

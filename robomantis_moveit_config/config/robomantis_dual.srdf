@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  robomantis_dual.srdf
+  ====================
+  左臂 left_arm  = 原 geni_craner1 (RS01)
+  右臂 right_arm = 原 geni_craner  (RS06)
+  - left_arm / right_arm：两个独立规划组（各 7 DOF）
+  - both_arms：合并组（14 DOF，协同规划，可选）
+  - 臂内相邻/不可碰撞 link 对已禁用；双臂之间碰撞保持启用（安全）
+  - URDF 已有 world→left/right_base_link 固定关节，不再需要 virtual_joint
+-->
+<robot name="robomantis_dual">
+
+    <!-- ==================== GROUPS ==================== -->
+    <group name="left_arm">
+        <chain base_link="left_base_link" tip_link="left_tool0"/>
+    </group>
+    <group name="right_arm">
+        <chain base_link="right_base_link" tip_link="right_tool0"/>
+    </group>
+    <group name="both_arms">
+        <group name="left_arm"/>
+        <group name="right_arm"/>
+    </group>
+
+    <!-- ==================== GROUP STATES ==================== -->
+    <group_state name="home" group="left_arm">
+        <joint name="left_joint1" value="0"/>
+        <joint name="left_joint2" value="0"/>
+        <joint name="left_joint3" value="0"/>
+        <joint name="left_joint4" value="0"/>
+        <joint name="left_joint5" value="0"/>
+        <joint name="left_joint6" value="0"/>
+        <joint name="left_joint7" value="0"/>
+    </group_state>
+    <group_state name="home" group="right_arm">
+        <joint name="right_joint1" value="0"/>
+        <joint name="right_joint2" value="0"/>
+        <joint name="right_joint3" value="0"/>
+        <joint name="right_joint4" value="0"/>
+        <joint name="right_joint5" value="0"/>
+        <joint name="right_joint6" value="0"/>
+        <joint name="right_joint7" value="0"/>
+    </group_state>
+    <group_state name="home" group="both_arms">
+        <joint name="left_joint1" value="0"/>
+        <joint name="left_joint2" value="0"/>
+        <joint name="left_joint3" value="0"/>
+        <joint name="left_joint4" value="0"/>
+        <joint name="left_joint5" value="0"/>
+        <joint name="left_joint6" value="0"/>
+        <joint name="left_joint7" value="0"/>
+        <joint name="right_joint1" value="0"/>
+        <joint name="right_joint2" value="0"/>
+        <joint name="right_joint3" value="0"/>
+        <joint name="right_joint4" value="0"/>
+        <joint name="right_joint5" value="0"/>
+        <joint name="right_joint6" value="0"/>
+        <joint name="right_joint7" value="0"/>
+    </group_state>
+
+    <!-- ==================== DISABLE COLLISIONS ==================== -->
+    <!-- 左臂内（原 geni_craner1，加 left_ 前缀） -->
+    <disable_collisions link1="left_base_link" link2="left_link1" reason="Adjacent"/>
+    <disable_collisions link1="left_base_link" link2="left_link2" reason="Never"/>
+    <disable_collisions link1="left_base_link" link2="left_link3" reason="Never"/>
+    <disable_collisions link1="left_base_link" link2="left_link4" reason="Never"/>
+    <disable_collisions link1="left_base_link" link2="left_link5" reason="Never"/>
+    <disable_collisions link1="left_base_link" link2="left_link6" reason="Never"/>
+    <disable_collisions link1="left_base_link" link2="left_link7_gripper" reason="Never"/>
+    <disable_collisions link1="left_link1" link2="left_link2" reason="Adjacent"/>
+    <disable_collisions link1="left_link1" link2="left_link3" reason="Never"/>
+    <disable_collisions link1="left_link1" link2="left_link4" reason="Never"/>
+    <disable_collisions link1="left_link1" link2="left_link5" reason="Never"/>
+    <disable_collisions link1="left_link1" link2="left_link6" reason="Never"/>
+    <disable_collisions link1="left_link1" link2="left_link7_gripper" reason="Never"/>
+    <disable_collisions link1="left_link2" link2="left_link3" reason="Adjacent"/>
+    <disable_collisions link1="left_link2" link2="left_link4" reason="Never"/>
+    <disable_collisions link1="left_link2" link2="left_link5" reason="Never"/>
+    <disable_collisions link1="left_link2" link2="left_link6" reason="Never"/>
+    <disable_collisions link1="left_link2" link2="left_link7_gripper" reason="Never"/>
+    <disable_collisions link1="left_link3" link2="left_link4" reason="Adjacent"/>
+    <disable_collisions link1="left_link3" link2="left_link5" reason="Never"/>
+    <disable_collisions link1="left_link3" link2="left_link6" reason="Never"/>
+    <disable_collisions link1="left_link3" link2="left_link7_gripper" reason="Never"/>
+    <disable_collisions link1="left_link4" link2="left_link5" reason="Adjacent"/>
+    <disable_collisions link1="left_link4" link2="left_link6" reason="Never"/>
+    <disable_collisions link1="left_link4" link2="left_link7_gripper" reason="Never"/>
+    <disable_collisions link1="left_link5" link2="left_link6" reason="Adjacent"/>
+    <disable_collisions link1="left_link5" link2="left_link7_gripper" reason="Never"/>
+    <disable_collisions link1="left_link6" link2="left_link7_gripper" reason="Adjacent"/>
+
+    <!-- 右臂内（原 geni_craner，加 right_ 前缀） -->
+    <disable_collisions link1="right_base_link" link2="right_link1" reason="Adjacent"/>
+    <disable_collisions link1="right_base_link" link2="right_link2" reason="Never"/>
+    <disable_collisions link1="right_base_link" link2="right_link3" reason="Never"/>
+    <disable_collisions link1="right_base_link" link2="right_link4" reason="Never"/>
+    <disable_collisions link1="right_base_link" link2="right_link5" reason="Never"/>
+    <disable_collisions link1="right_base_link" link2="right_link6" reason="Never"/>
+    <disable_collisions link1="right_base_link" link2="right_link7_gripper" reason="Never"/>
+    <disable_collisions link1="right_link1" link2="right_link2" reason="Adjacent"/>
+    <disable_collisions link1="right_link1" link2="right_link3" reason="Never"/>
+    <disable_collisions link1="right_link1" link2="right_link4" reason="Never"/>
+    <disable_collisions link1="right_link1" link2="right_link5" reason="Never"/>
+    <disable_collisions link1="right_link1" link2="right_link6" reason="Never"/>
+    <disable_collisions link1="right_link1" link2="right_link7_gripper" reason="Never"/>
+    <disable_collisions link1="right_link2" link2="right_link3" reason="Adjacent"/>
+    <disable_collisions link1="right_link2" link2="right_link4" reason="Never"/>
+    <disable_collisions link1="right_link2" link2="right_link5" reason="Never"/>
+    <disable_collisions link1="right_link2" link2="right_link6" reason="Never"/>
+    <disable_collisions link1="right_link2" link2="right_link7_gripper" reason="Never"/>
+    <disable_collisions link1="right_link3" link2="right_link4" reason="Adjacent"/>
+    <disable_collisions link1="right_link3" link2="right_link5" reason="Never"/>
+    <disable_collisions link1="right_link3" link2="right_link6" reason="Never"/>
+    <disable_collisions link1="right_link3" link2="right_link7_gripper" reason="Never"/>
+    <disable_collisions link1="right_link4" link2="right_link5" reason="Adjacent"/>
+    <disable_collisions link1="right_link4" link2="right_link6" reason="Never"/>
+    <disable_collisions link1="right_link4" link2="right_link7_gripper" reason="Never"/>
+    <disable_collisions link1="right_link5" link2="right_link6" reason="Adjacent"/>
+    <disable_collisions link1="right_link5" link2="right_link7_gripper" reason="Never"/>
+    <disable_collisions link1="right_link6" link2="right_link7_gripper" reason="Adjacent"/>
+
+    <!-- 两个底座固定相距 35cm，永不碰撞 -->
+    <disable_collisions link1="left_base_link" link2="right_base_link" reason="Never"/>
+
+</robot>

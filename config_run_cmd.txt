@@ -1,0 +1,42 @@
+# DEPENDENCY（如果没装）:
+sudo apt-get install net-tools
+sudo apt-get install can-utils
+sudo apt-get install ros-humble-can-msgs
+sudo apt-get install ros-humble-socketcan-bridge
+
+# 加载内核模块
+sudo modprobe can        # 把 CAN 协议栈加载到 Linux 内核
+sudo modprobe can_raw    # 把原始 CAN 通信能力加载到内核
+sudo modprobe can_dev    # 把 CAN 设备管理框架加载到内核
+
+# 如需can0
+sudo ip link set can0 type can bitrate 1000000 # 设置 can0 接口为 CAN 类型，波特率 1Mbps
+
+sudo ip link set can0 up # 激活 can0 接口，相当于"打开开关"
+sudo ifconfig can0 txqueuelen 100 # 设置 CAN 接口的发送缓冲区队列长度为 100 帧，防止高速发送数据时丢帧，给缓冲区留足空间
+
+# 如需can1
+sudo ip link set can1 type can bitrate 1000000
+sudo ip link set can1 up
+sudo ifconfig can1 txqueuelen 100
+
+# 如需can2
+sudo ip link set can2 type can bitrate 1000000
+sudo ip link set can2 up
+sudo ifconfig can2 txqueuelen 100
+
+# 如需can3
+sudo ip link set can3 type can bitrate 1000000
+sudo ip link set can3 up
+sudo ifconfig can3 txqueuelen 100
+
+# 如需can4
+sudo ip link set can4 type can bitrate 1000000
+sudo ip link set can4 up
+sudo ifconfig can4 txqueuelen 100
+
+# run
+colcon build 
+source install/setup.bash # 在ws终端路径中运行
+ros2 run rs_motor_ros2 rs_motor_ros2
+
