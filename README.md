@@ -96,8 +96,8 @@ interfaces.
 ```
 RoboMantis/
 ├── robomantis_description/      # URDF/Xacro, STL meshes, display launch (dual‑arm)
-├── robomantis_hw_rs01/         # Left‑arm ros2_control hardware, CAN driver, zero‑torque controller(C++)
-├── robomantis_hw_rs06/         # Right‑arm ros2_control hardware, CAN driver, zero‑torque controller(C++)
+├── robomantis_hw_rs01/          # Left‑arm ros2_control hardware, CAN driver, zero‑torque controller(C++)
+├── robomantis_hw_rs06/          # Right‑arm ros2_control hardware, CAN driver, zero‑torque controller(C++)
 ├── robomantis_moveit_config/    # MoveIt 2 config (dual‑arm SRDF, OMPL, controllers)
 ├── easy_handeye2/               # hand‑eye calibration (eye‑on‑base, fixed external camera)
 └── easy_handeye2_msgs/          # calibration message definitions
