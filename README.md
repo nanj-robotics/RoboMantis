@@ -32,7 +32,7 @@ Pinocchio RNEA for gravity compensation plus adaptive damping (Kp=0, so
 motors do not resist manual movement).
 ```bash
 # 1. Real robot arms + MoveIt 2 + RViz (all‑in‑one launch)
-ros2 launch robomantis_moveit_config real_robot.launch.py
+ros2 launch robomantis_moveit_config dual_real_robot.launch.py
 
 # 2. Zero‑torque mode
 # For left arm
