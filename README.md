@@ -2,7 +2,7 @@
 
 <div align="center">
 
-https://github.com/user-attachments/assets/14525526-cf43-481a-9aa0-0c9e67f041a4
+https://github.com/user-attachments/assets/ffaa043e-f792-4960-addb-18e9d8d26e81
 
 <p>RoboMantis (Dual 7‑DOF robot arms)</p>
 </div>
