@@ -1,10 +1,10 @@
 # RoboMantis: Dual 7‑DOF Robot Arms with YOLOv11‑Seg + FoundationPose Vision‑Based Grasping
 
 <div align="center">
-  <video width="480" controls>
-    <source src="https://github.com/user-attachments/assets/14525526-cf43-481a-9aa0-0c9e67f041a4" type="video/mp4">
-  </video>
-  <p>RoboMantis (Dual 7‑DOF robot arms)</p>
+
+https://github.com/user-attachments/assets/14525526-cf43-481a-9aa0-0c9e67f041a4
+
+<p>RoboMantis (Dual 7‑DOF robot arms)</p>
 </div>
 
 A dual 7‑degree‑of‑freedom robotic arm platform. Each arm has an iron
