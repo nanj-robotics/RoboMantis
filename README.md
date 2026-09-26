@@ -14,6 +14,8 @@ Vision‑based grasping uses YOLOv11‑Seg for instance segmentation and
 FoundationPose for 6D pose estimation, with dual‑arm coordinated motion
 planning via MoveIt 2.
 
+*This project was developed during my internship and released with the permission of my former employer.*
+
 ## Hardware
 | Component | Details |
 |---|---|
